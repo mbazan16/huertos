@@ -1,0 +1,165 @@
+
+body {	
+	background-color: #03f39f;
+	background-image: url("../img/rustico.jpg"); 	
+    background-repeat: no-repeat;
+	background-size: cover;
+	font-family: Times New Roman;
+	font-size:12px;
+	color:  #1f4726;
+	 
+}
+
+nav,header{
+  margin: 0;
+  padding: 0;	
+}
+
+nav ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ecffa2;
+}
+
+nav li{
+  float: left;
+	color:#bcc976;	
+	font-weight: bold;
+	text-transform: uppercase;
+}
+nav li:last-child
+{
+    float:right;
+}
+
+
+nav li a {  
+  display: block;
+  color: #1f4726;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #bcc976;
+  color:grey;
+}
+
+nav li:last-child a
+{
+     
+  display: block;
+  padding: 5px 5px;
+  text-align: center;
+}
+nav li:last-child a:hover {
+  background-color: #ecffa2;
+}
+
+.active {
+  background-color: #bcc976; 
+}
+
+h1{	
+	color: #ecffa2;
+	font-size:24px;	
+	text-shadow: 1px 1px #1f4726;
+	text-align: center;
+	margin: auto;
+	padding:20px;
+	
+}
+
+#stitulo h1{
+	color: #1f4726;
+	font-family: AR HERMANN;
+	font-size: 40px;	
+}
+
+
+
+#slistado,#sdatos{
+	background-color: #ecffa2;
+	margin:15px;
+	padding:15px;		
+}
+#stext{
+	color: #ecffa2;	
+	font-size:18px;
+	text-shadow: 1px 1px #1f4726;
+}
+
+#smessage{
+	color: #ecffa2;	
+	font-size:18px;
+	text-shadow: 1px 1px black;
+	text-align: center;
+	margin: 10px;
+	padding:20px;
+	background-color: #1f4726;
+}
+
+#serror{
+	color: #ecffa2;	
+	font-size:18px;
+	text-shadow: 1px 1px black;
+	text-align: center;
+	margin: 10px;
+	padding:20px;
+	background-color: red;
+}
+
+
+table{
+	width: 100%;
+	border: 1px solid  #1f4726;
+}
+
+td{
+  text-align: center;
+  font-family: Times New Roman;
+}
+td a {  
+  color: #ff0080;
+  font-weight: bold;
+  text-decoration: none;
+}
+td a:hover {
+  color:#ecffa2;	
+}
+
+th{		
+	font-weight: bold;
+	color:  #1f4726;	
+	text-transform: uppercase;
+	font-size:14px;
+}
+
+caption{
+	text-align: center;	
+	color: #1f4726;	
+	text-shadow: 1px 1px #ecffa2;	
+	font-size: 16px;
+	background-color:  #bcc976;
+	border: 1px solid  #1f4726;	
+}
+
+input[type=text] {
+  border: 1px solid  #1f4726;
+  border-radius: 4px;
+}
+select {
+  border: 1px solid  #1f4726;
+  border-radius: 4px;
+}
+label{
+	color: #ecffa2;	
+	text-shadow: 1px 1px #1f4726;
+	font-size:18px;	
+	
+}
+
+
