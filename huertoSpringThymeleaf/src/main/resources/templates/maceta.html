@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Maceta <span th:text="${maceta.codigo}" th:remove="tag"/></title>
+<link th:href="@{/css/estilo.css}" rel="stylesheet" type="text/css">
+<script>
+	function verModificar() {
+		document.getElementById("smodificar").style.display = "block";
+	}
+	function modificar() {
+		if (confirm("¿Desea cambiar los datos de la maceta?")) {
+			document.getElementById("smodificar").style.display = "none";
+			document.getElementById("fmodificar").submit();
+		}
+	}
+	function eliminar() {
+		if (confirm("¿Desea eliminar la maceta?")) {
+			document.getElementById("feliminar").submit();
+		}
+	}
+</script>
+</head>
+<body>
+	
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="@{/}" >Home</a></li>
+				<li><a th:href="@{/huerto}">Huertos</a></li>
+				<li><a th:href="@{/maceta}" class="active">Macetas</a></li>
+				<li><a th:href="@{/planta}">Plantas</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+	<section id="stitulo">
+		<h1>Maceta <span th:text="${maceta.codigo}" th:remove="tag"/></h1>
+	</section>
+	<section id="sdatos">
+		<table id="datos">
+		 <tr>
+				<th>Huerto</th>
+				<td th:text="${maceta.huerto.nombre}"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>Codigo</th>
+				<td th:text="${maceta.codigo}"></td>
+				<td><a href="javascript:verModificar()"><img src="https://img.icons8.com/color/48/000000/edit--v1.png" width=15 height=15/></a>
+				 <a	href="javascript:eliminar()"><img src="https://img.icons8.com/color/48/000000/waste--v1.png" width=15 height=15/></a></td>
+			</tr>
+			<tr>
+				<th>Tamanio</th>
+				<td th:text="${maceta.tamanio}+' '+${maceta.tamanio.cms}+cms"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>Material</th>
+				<td th:text="${maceta.material}"></td>
+				<td></td>
+			</tr>
+		</table>
+	</section>
+	<section id="smodificar" style="display: none;">
+		<h1>Modificar Maceta</h1>
+		<form id="fmodificar" method="post" th:object="${maceta}" th:action="@{/maceta/}+${maceta.id}">
+			<input hidden="true" type="text" th:field="*{huerto.id}" />
+			<input hidden="true" type="text" th:field="*{id}" />
+			<label for="codigo">Codigo</label> 
+			<input type="text" id="codigo"
+				th:field="*{codigo}" title="Codigo" readonly />
+			<label for="tamanio">Tamanio</label> 
+			<select id="tamanio"	th:field="*{tamanio}" required>
+			  <option th:each="etamanio:${tamanios}" th:value="${etamanio}" 
+			  th:text="${etamanio}+' '+${etamanio.cms}+cms"
+			  th:selected="${tamanio == etamanio}"/>
+			</select>
+			<label for="material"><fmt:message key="maceta.material"/></label> 
+			<select id="material" th:field="*{material}" required>
+			   <option th:each="ematerial:${materiales}" th:value="${ematerial}"
+			   th:text="${ematerial}"
+			    th:selected="${material == ematerial}"/>
+			</select>
+			<input type="button" value="Enviar"	onClick="javascript:modificar()">
+		</form>
+	</section>
+	<section id="seliminar" style="display: none;">
+		<form id="feliminar" method="post" th:action="@{/maceta/r/}+${maceta.id}">
+		</form>
+	</section>
+	
+	<section id="slistado" th:if="${!plantas.empty}">
+		<table id="tlistado">
+		<caption>Listado Plantas</caption>
+		  	<tr>
+				<th>Nombre</th>
+				<th></th>
+			</tr>
+			<tr th:each="planta:${plantas}">
+				<td th:text="${planta.nombre}"/>
+			  <td><a th:href="@{/planta/r/}+${planta.id}"><img src="https://img.icons8.com/color/48/000000/waste--v1.png" width=15 height=15/></a></td>
+			</tr>
+		</table>
+	</section>
+	
+	 <section id="stext" th:if="${plantas.empty}">
+	   No hay plantas
+	 </section>
+	 	 
+	<section id="snuevo" class="modal">
+		<h1>Nueva planta</h1>
+		<form id="fnuevo" method="post" th:action="@{/planta}">
+			<input hidden="true" type="text" name="forward" th:value="@{/maceta/}+${maceta.id}" />
+			<input hidden="true" type="text" name="maceta.id" th:value="${maceta.id}" />
+			<label for="nombre">Nombre</label> 
+			<input type="text" id="nombre"
+				name="nombre" title="Nombre" placeholder="Nombre Planta" required />
+			<input type="submit" value="Enviar">
+		</form>
+	</section>
+	</main>	
+		
+	 <section id="smessage" th:if=${message!=null}>
+	   <span th:text="${message}" th:remove="tag"/>
+	 </section>
+	 
+	 <section id="smessage" th:if=${error!=null}>
+	   <span th:text="${error}" th:remove="tag"/>
+	 </section>
+	<footer> </footer>
+</body>
+</html>

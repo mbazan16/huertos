@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Macetas</title>
+<link th:href="@{/css/estilo.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="@{/}">Home</a></li>
+				<li><a th:href="@{/huerto}">Huertos</a></li>
+				<li><a th:href="@{/maceta}" class="active">Macetas</a></li>
+				<li><a th:href="@{/planta}">Plantas</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+	<section id="stitulo">
+		<h1>Macetas</h1>
+	</section>
+	
+	<section id="slistado" th:if="${!macetas.empty}">
+		<table id="tlistado">
+			<tr>
+				<th>Código</th>
+				<th>Tamaño</th>
+				<th>Material</th>
+				<th>Nombre Huerto</th>
+				<th>Numero Plantas</th>
+				<th></th>
+			</tr>
+			
+				<tr th:each="maceta:${macetas}">
+					<td th:text="${maceta.codigo}"/>
+					<td th:text="${maceta.tamanio}+' '+${maceta.tamanio.cms}+cms"/>
+					<td th:text="${maceta.material}"/>
+					<td th:text="${maceta.nombreHuerto}"/>
+					<td th:text="${maceta.nPlantas}"/>
+					<td><a th:href="@{/maceta/}+${maceta.id}"><img src="https://img.icons8.com/color/search" width=15 height=15></a>
+					<a th:href="@{/maceta/r/}+${maceta.id}"><img src="https://img.icons8.com/color/48/000000/waste--v1.png" width=15 height=15/></a></td>
+				</tr>
+		</table>
+	</section>
+	
+	 <section id="stext" th:if="${macetas.empty}">
+	   No existen macetas
+	 </section>
+	<section id="snuevo" class="modal" th:if="${!huertos.empty}">
+		<h1>Maceta Nueva</h1>		
+		<form id="fnuevo" method="post" th:action="@{/maceta}">
+		
+			<label for="idHuerto">Huerto</label> 
+			<select id="idHuerto"	name="huerto.id" required>
+			    <option>Seleccionar</option>
+			  <option th:each="huerto:${huertos}" th:value="${huerto.key}" 
+			  th:text="${huerto.value}"/>
+			</select>
+			<label for="codigo">Código</label> 
+			<input type="text" id="codigo"
+				name="codigo" title="Codigo" placeholder="02578932" required />
+			<label for="tamanio">Tamanio</label> 
+			<select id="tamanio"	name="tamanio" required>
+			 <option>Seleccionar</option>
+			  <option th:each="tamanio:${tamanios}" th:value="${tamanio}"
+			    th:text="${tamanio}+' '+${tamanio.cms}+cms" />
+			</select>
+			<label for="material">Material</label> 
+			<select id="material" name="material" required>
+			 <option>Seleccionar</option>
+			   <option th:each="material:${materiales}" th:value="${material}" 
+			   th:text="${material}"/>
+			</select>
+			<input type="submit" value="Enviar">
+		</form>
+	</section>
+	 <section id="stext"  th:if="${!huertos.empty}">
+	   No hay huertos
+	 </section>
+		
+	 <section id="smessage" th:if=${message!=null}>
+	   <span th:text="${message}" th:remove="tag"/>
+	 </section>
+	 
+	 <section id="smessage" th:if=${error!=null}>
+	   <span th:text="${error}" th:remove="tag"/>
+	 </section>
+	</main>
+	<footer> </footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Plantas</title>
+<link th:href="@{/css/estilo.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="@{/}">Home</a></li>
+				<li><a th:href="@{/huerto}">Huertos</a></li>
+				<li><a th:href="@{/maceta}">Macetas</a></li>
+				<li><a th:href="@{/planta}" class="active">Plantas</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+	<section id="stitulo">
+		<h1>Plantas</h1>
+	</section>
+	<section id="slistado" th:if="${!plantas.empty}">
+		<table id="tlistado">
+			<tr>
+				<th>Huerto</th>
+				<th>Maceta</th>
+				<th>Nombre Planta</th>
+				<th></th>
+			</tr>
+				<tr  th:each="planta:${plantas}">
+					<td th:text="${planta.maceta.huerto.nombre}" th:href="@{/huerto/}+${planta.maceta.huerto.id}"/>
+					<td th:href="@{/maceta?}+${planta.maceta.id}" th:text="${planta.maceta.codigo}" />
+					<td th:text="${planta.nombre}"/>
+					<td>
+					<a th:href="@{/planta/r/}+${planta.id}"><img src="https://img.icons8.com/color/48/000000/waste--v1.png" width=15 height=15/></a></td>
+				</tr>
+		</table>
+	</section>
+	 <section id="stext" th:if="${plantas.empty}">>
+	   No hay plantas
+	 </section>
+	<section id="snuevo" class="modal">
+		<h1>Nueva Planta</h1>
+		<form id="fnuevo" method="post" th:action="@{/planta}">
+			<label for="idMaceta">Maceta</label> 
+			<select id="idMaceta"	name="maceta.id" required>
+			    <option value="">Seleccionar</option>			   
+			    <option th:each="maceta:${macetas}" th:value="${maceta.id}" th:text="${maceta.huerto.nombre}+' '+${maceta.codigo}"></option>
+			</select>
+			<label for="nombre">Nombre planta</label> 
+			<input type="text" id="nombre"
+				name="nombre" title="Nombre" placeholder="Planta" required />
+			<input type="submit" value="Enviar">
+		</form>
+	</section>
+		
+	 <section id="smessage" th:if=${message!=null}>
+	   <span th:text="${message}" th:remove="tag"/>
+	 </section>
+	 
+	 <section id="smessage" th:if=${error!=null}>
+	   <span th:text="${error}" th:remove="tag"/>
+	 </section>
+	</main>
+	<footer> </footer>
+</body>
+</html>

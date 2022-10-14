@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Error</title>
+<link href="${context}/css/estilo.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<header>			
+		<nav>
+			<ul>
+				<li><a th:href="@{/}" class="active">Home</a></li>
+				<li><a th:href="@{/huerto}">Huertos</a></li>
+				<li><a th:href="@{/maceta}">Macetas</a></li>
+				<li><a th:href="@{/planta}">Plantas</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+	<section id="stitulo">
+		<h1>Error</h1>
+	
+	</section>
+	
+	 <section id="serror">
+	 	Se ha producido un error indeterminado
+	 </section>
+	</main>
+	<footer> </footer>
+</body>
+</html>
